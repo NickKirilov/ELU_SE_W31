@@ -1,30 +1,27 @@
-name: Static Analysis
+name: CI - Static Analysis & Tests
 
 on:
   push:
-    branches: [ main, master ]
+    branches: ["**"]
   pull_request:
-    branches: [ main, master ]
+    branches: ["**"]
 
 jobs:
-  flake8-lint:
+  static-analysis:
+    name: Pylint Static Analysis
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      # Step 3: Install Flake8
-      - name: Install Flake8
-        run: pip install flake8
+      - name: Install Pylint
+        run: pip install pylint
 
-      # Step 4: Run Flake8
-      - name: Run Flake8
-        run: flake8 . --count --show-source --statistics
+      - name: Run Pylint
+        run: pylint shopping_cart.
