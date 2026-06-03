@@ -1,8 +1,11 @@
+"""Shopping cart module that calculates and displays the total price of items."""
+
+
 def calculate_total(cart):
-    """Calculate the total price of items in the cart."""
+    """Calculate the total price of all items in the cart."""
     total = 0
-    for item in cart:
-        total += float(item['price'])
+    for cart_item in cart:
+        total += float(cart_item['price'])
     return total
 
 

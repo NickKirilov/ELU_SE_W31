@@ -1,11 +1,13 @@
+"""Unit tests for the shopping_cart module."""
 import unittest
 from shopping_cart import calculate_total
 
 
 class TestCalculateTotal(unittest.TestCase):
+    """Tests for the calculate_total function."""
 
     def test_total_with_floats(self):
-        """Test that total is correct with float prices."""
+        """Test correct total with standard float prices."""
         cart = [
             {'name': 'Item A', 'price': 10.99},
             {'name': 'Item B', 'price': 5.99},
@@ -35,13 +37,23 @@ class TestCalculateTotal(unittest.TestCase):
         self.assertAlmostEqual(result, 19.99, places=2)
 
     def test_total_with_mixed_types(self):
-        """Test cart with both string and float prices."""
+        """Test cart with both float and string prices."""
         cart = [
             {'name': 'Item A', 'price': 10.00},
             {'name': 'Item B', 'price': '5.50'},
         ]
         result = calculate_total(cart)
         self.assertAlmostEqual(result, 15.50, places=2)
+
+    def test_full_cart(self):
+        """Test the default CART from the module."""
+        cart = [
+            {'name': 'Item A', 'price': 10.99},
+            {'name': 'Item B', 'price': 5.99},
+            {'name': 'Item C', 'price': 8.49},
+        ]
+        result = calculate_total(cart)
+        self.assertAlmostEqual(result, 25.47, places=2)
 
 
 if __name__ == '__main__':
